@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+    <meta name="description" content="This linkvertise bypasser is an easy to use tool for bypassing linkvertise ad-links" />
+    <title>Linkvertise Bypasser</title>
+    <meta name="google-site-verification" content="Rwcj2iy55rHn9_bXzlhWOrFPuc81-Bi_ztA_gYGjUlE" />
+        <meta HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');</style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/black/pace-theme-flash.min.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+     <meta name="keywords" content="linkvertise bypasser, linkvertise bypass, universal bypass, linkvertise hack, linkvertise, link vertise, bypasser, bypass linkvertise, how to bypass linkvertise, how to skip linkvertise, linkvertise skipper, skip linkvertise, skip linkvertise ads, linkvertise ads bypass, linkvertise ads bypasser" />
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./assets/img/favicon.png">
+</head>
+<body>
+    <div class="container">
+        <div class="jumbotron text-center">
+            <h2 class="display-4">Ad-Link Bypasser</h2>
+			<p class="display-5"><b><code>Works best on Google Chrome</code></b></p><br>
+			<p class="lead">Official Status: <code>Patched</code></p>
+            <h3 id=count></h3>
+            <h3 id=count></h3>
+            <p class="lead">Put the ad-link that you want bypassed inside the textbox. Then press the Bypass Ad-Link button.</p>
+			    <p class="lead">Ad-Link Bypasser not working? <a href="https://discord.gg/9ztVfGPwDb">Join the discord</a></p>
+            <div id="logic">
+                <input type="text" id="input_link" placeholder="Insert Ad-Link Link Here" class="input_box">
+                <br>
+                <div class="buttons">
+                    <button id="submit_btn" class="button" onclick="bypass()">Bypass Ad-Link</button>
+                </div>
+                <br>
+                <center><h3>Output Link:</h3></center>
+                <a href="#" id="results"></a>
+            </div>
+        </div>
+    </div>
+    <script>
+        function start() {
+url = document.getElementById("input_link").value
+
+if (url.includes("95884")) {
+    document.getElementById("results").href = ""
+    document.getElementById("results").innerHTML = "You are not allowed to bypass this link"
+    alert("You are not allowed to bypass this link")
+    return;
+}
+if (url.includes("168841")) {
+    document.getElementById("results").href = ""
+    document.getElementById("results").innerHTML = "You are not allowed to bypass this link"
+    alert("You are not allowed to bypass this link")
+    return;
+}
+document.getElementById("submit_btn").innerHTML = "Bypassing..."
+document.getElementById("results").innerHTML = ""
+bypass(url)
+}
+
+
+function bypass(url) {
+    if (document.getElementById('input_link').value.includes("dynamic")) {
+		if (document.getElementById('input_link').value.includes("&o=sharing")) {
+			var mystring = document.getElementById('input_link').value;
+			finString = mystring.toString();
+			var newString = finString.replace("%3D", "");
+			var newString1 = newString.replace("%3D", "");
+			var newString2 = newString1.replace("%3D", "");
+			
+			var str = newString2;  
+			var encodedstr = str.split('dynamic?r=').pop().split('&o=sharing')[0];
+    
+			var decodedStringAtoB = atob(encodedstr);
+			document.getElementById("results").href=decodedStringAtoB
+			document.getElementById("results").innerHTML=decodedStringAtoB
+			
+			document.getElementById("submit_btn").innerHTML = "Bypass Ad-Link"
+		}
+		else {
+		    if (document.getElementById('input_link').value.includes("dynamic/?r=")) {
+                var testStr = document.getElementById('input_link').value;
+                var splitStr = testStr.substring(testStr.indexOf('dynamic/?r=') + 11);
+        
+                document.getElementById("results").innerHTML=splitStr
+        
+                var decodedStringAtoB = atob(splitStr);
+                document.getElementById("results").href=decodedStringAtoB
+	            document.getElementById("results").innerHTML=decodedStringAtoB
+				
+				document.getElementById("submit_btn").innerHTML = "Bypass Ad-Link"
+            }
+            else {
+                var testStr = document.getElementById('input_link').value;
+                var splitStr = testStr.substring(testStr.indexOf('dynamic?r=') + 10);
+        
+                document.getElementById("results").innerHTML=splitStr
+        
+                var decodedStringAtoB = atob(splitStr);
+                document.getElementById("results").href=decodedStringAtoB
+	            document.getElementById("results").innerHTML=decodedStringAtoB
+				
+				document.getElementById("submit_btn").innerHTML = "Bypass Ad-Link"
+            }
+		}
+    }
+    else {
+        fetch("https://c6c744d2-ec5a-4094-acf7-6f12a73efc13.id.repl.co/bypass?url=" + document.getElementById('input_link').value).then(r => r.json().then(json => {
+        if (json.success) {
+            document.getElementById("submit_btn").innerHTML = "Bypass Ad-Link"
+            document.getElementById("results").href = json.destination
+            document.getElementById("results").innerHTML = json.destination
+        } else {
+            document.getElementById("submit_btn").innerHTML = "Bypass Ad-Link"
+        alert("2An unexpected error has occured.")
+        }
+    }))}
+}
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</body>
+</html>

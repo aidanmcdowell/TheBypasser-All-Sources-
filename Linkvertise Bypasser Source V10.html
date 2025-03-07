@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/black/pace-theme-flash.min.css">
+        <meta name="google-site-verification" content="Rwcj2iy55rHn9_bXzlhWOrFPuc81-Bi_ztA_gYGjUlE" />
+        <meta HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+        <meta name="description" content="This linkvertise bypasser is an easy to use tool for bypassing linkvertise ad-links" />
+        <meta name="keywords" content="linkvertise bypasser, linkvertise bypass, universal bypass, linkvertise hack, linkvertise, link vertise, bypasser, bypass linkvertise, how to bypass linkvertise, how to skip linkvertise, linkvertise skipper, skip linkvertise, skip linkvertise ads, linkvertise ads bypass, linkvertise ads bypasser" />
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Linkvertise Bypasser</title>
+        <link rel="icon" href="./assets/img/favicon.png">
+        <link rel="stylesheet" href="./assets/css/style.css">
+	</head>
+	<body>
+		<noscript>Please enable JavaScript to proceed.</noscript>
+		<div class="container">
+			<div class="jumbotron text-center">
+			    <h2 class="display-4">Ad-Link Bypasser</h2>
+			    <p class="lead">Unofficial Status: Working</p>
+			    <h3 id=count></h3>
+			    <h3 id=count></h3>
+			    <p class="lead">Put the ad-link that you want to be bypassed inside the textbox. Then press the Bypass Ad-Link button.</p>
+			    <p class="lead">Ad-Link Bypasser not working? Refresh or try <a href="https://thebypasser.com/versions/version2.html">Ad-Link Bypasser Version 2</a></p>
+			    <form class="text-left" id="generator">
+                    
+                    <center><input type="text" placeholder="Paste ad-link link here" id="url"></center><br>
+                    <div class="form-group">
+                    <center><div class="button" onclick="start()" id="button"><div id="circle"></div>Bypass Ad-Link</div></center>
+                    
+                    
+                    <center><h3>Output Link:</h3></center>
+                    <center><a href="#" id="output1"></a></center>
+                    </div>
+                </form>
+			</div>
+		</div>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+		
+		
+		
+		<script data-cfasync='false' type='text/javascript' src='//p412311.clksite.com/adServe/banners?tid=OM1BYPASSER_DI'></script>
+		
+        <div class="footer"><center><p class="lead"><a href="https://discord.gg/c8MYupeWMT">Join the Discord!</a></p></center></div>
+		
+
+<script>
+function start() {
+url = document.getElementById("url").value
+
+if (url.includes("95884")) {
+	document.getElementById("output1").href = ""
+    document.getElementById("output1").innerHTML = "You are not allowed to bypass this link"
+	alert("You are not allowed to bypass this link")
+	return;
+}
+if (url.includes("168841")) {
+	document.getElementById("output1").href = ""
+    document.getElementById("output1").innerHTML = "You are not allowed to bypass this link"
+	alert("You are not allowed to bypass this link")
+	return;
+}
+if (url.includes("103742")) {
+	document.getElementById("output1").href = ""
+    document.getElementById("output1").innerHTML = "You are not allowed to bypass this link"
+	alert("You are not allowed to bypass this link")
+	return;
+}
+document.getElementById("button").innerHTML = "Bypassing..."
+document.getElementById("output1").innerHTML = ""
+bypass(new URL(url))
+}
+
+function bypass(url) {
+    if (!url.pathname.includes('dynamic')) {
+        fetch('https://adlink-bypass-api.bigbypass.repl.co/api?=' + url).then(r => r.json()).then(json => fetch("https://cors.bridged.cc/" + json.bypassedlink).catch(() => console.log('Dead domain.')).then(r => r.json()).then(json => {
+            json = json
+            try {
+                document.getElementById("output1").innerHTML = json.data.target
+                document.getElementById("output1").href = document.getElementById("output1").innerHTML
+                if (document.getElementById("output1").innerHTML != "") document.getElementById("button").innerHTML = 'Bypass Ad-Link'
+            } catch {
+                document.getElementById("button").innerHTML = "Ad-Bypass Link"
+                document.getElementById("output1").innerHTML = "There was an error with the API, please try bypassing again in about 5 seconds"
+                document.getElementById("output1").href = document.getElementById("output1").innerHTML
+            }
+        }))
+    } else {
+        document.getElementById("output1").innerHTML = atob(new URLSearchParams(url.search).get("r"))
+        document.getElementById("output1").href = document.getElementById("output1").innerHTML
+        if (document.getElementById("output1").innerHTML != "") document.getElementById("button").innerHTML = 'Bypass Ad-Link'
+        return;
+    }
+
+}
+ </script>
+
+<script data-cfasync='false' type='text/javascript' src='//p412311.clksite.com/adServe/banners?tid=OM1BYPASSER_DI'></script>
+	</body>
+</html>
+
+
+

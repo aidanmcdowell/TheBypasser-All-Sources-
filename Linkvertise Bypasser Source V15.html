@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+    <meta name="description" content="This linkvertise bypasser is an easy to use tool for bypassing linkvertise ad-links" />
+    <title>Linkvertise Bypasser</title>
+    <meta name="google-site-verification" content="Rwcj2iy55rHn9_bXzlhWOrFPuc81-Bi_ztA_gYGjUlE" />
+        <meta HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');</style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/black/pace-theme-flash.min.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+     <meta name="keywords" content="linkvertise bypasser, linkvertise bypass, universal bypass, linkvertise hack, linkvertise, link vertise, bypasser, bypass linkvertise, how to bypass linkvertise, how to skip linkvertise, linkvertise skipper, skip linkvertise, skip linkvertise ads, linkvertise ads bypass, linkvertise ads bypasser" />
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./assets/img/favicon.png">
+</head>
+<body>
+    <div class="container">
+        <div class="jumbotron text-center">
+            <h2 class="display-4">Ad-Link Bypasser</h2>
+			<p class="display-5"><b><code>Works best on Google Chrome</code></b></p><br>
+			<p class="lead">Official Status: <code>Patched</code></p>
+            <h3 id=count></h3>
+            <h3 id=count></h3>
+            <p class="lead">Put the ad-link that you want bypassed inside the textbox. Then press the Bypass Ad-Link button.</p>
+			    <p class="lead">Ad-Link Bypasser not working? <a href="https://discord.gg/9ztVfGPwDb">Join the discord</a></p>
+            <div id="logic">
+                <input type="text" id="input_link" placeholder="Insert Ad-Link Link Here" class="input_box">
+                <br>
+                <div class="buttons">
+                    <button id="submit_btn" class="button" onclick="bypass()">Bypass Ad-Link</button>
+                </div>
+                <br>
+                <center><h3>Output Link:</h3></center>
+                <a href="#" id="results"></a>
+            </div>
+        </div>
+    </div>
+    <script>
+        function bypass(){
+
+url = document.getElementById("input_link").value
+if (url.includes("133595")) {
+    document.getElementById("results").href = ""
+    document.getElementById("results").innerHTML = "You are not allowed to bypass this link"
+    alert("You are not allowed to bypass this link")
+    return;
+}
+
+url = document.getElementById("input_link").value
+if (url.includes("168841")) {
+    document.getElementById("results").href = ""
+    document.getElementById("results").innerHTML = "You are not allowed to bypass this link"
+    alert("You are not allowed to bypass this link")
+    return;
+}
+
+window.redirUrl=null
+window.corsbypass = 'https://script.google.com/macros/s/AKfycbzaSb1uBr19zSAtev7iJsnxJfI_XPa1cWjWeMWv7F1kcMpPFuA/exec'
+window.bypasserStatus='Loading Window...'
+var link = document.getElementById('input_link').value	
+
+try{
+var begin = link.match(/\d+/)
+var end = link.match(/\?/)
+if (end==null){
+    var idname = link.slice(begin.index, link.length)
+    }
+else {
+    var idname = link.slice(begin.index, end.index)
+    }
+}
+catch(error){
+console.error('Error | Please make sure the link is correct.')
+return
+}
+console.log('Step 1 | Recieved ID + Name ("'+idname+'")')
+
+try{
+var http = new XMLHttpRequest();
+var url = window.corsbypass+"?url=https://publisher.linkvertise.com/api/v1/redirect/link/static/"+idname
+http.open("GET", url);
+try {
+	http.send()
+}
+catch {
+	document.getElementById("results").href = "The API is currently rate-limited, please check in later or try Version 2";
+	document.getElementById("results").innerHTML = "https://thebypasser.com/versions/version2.html";
+}
+}
+catch(error){
+console.error('Error at Step 2 | [TRY AGAIN LATER] ')
+return
+}
+console.log('step 2 | Got api link | ("https://publisher.linkvertise.com/api/v1/redirect/link/static/'+idname+'")')
+http.onload = function(e){
+try{
+    var apiData=JSON.parse(http.responseText)
+}
+catch(error){
+    console.error('Error at Step 3 | API Content Was Not Recieved')
+    return
+}
+console.log('Step 3 | Recieved API Content')
+
+let key = {
+    timestamp: new Date().getTime(),
+    random: "6548307"
+}
+
+try{
+    key.link_id = apiData.data.link.id
+}
+catch(error){
+    console.error('Error at Step 4 | Linkvertise has presented a Captcha, Bypassing Failed')
+    return
+}
+console.log('step 4 | Found key | ("'+apiData.data.link.id+'")')
+
+//Try encoding the key
+try{
+    encodedKey = JSON.stringify({serial: btoa(JSON.stringify(key))})
+}
+catch(error){
+    console.log('Error at Step 5 | Key could not be encoded')
+    return
+}
+console.log('step 5 | Encoded key | ("'+encodedKey+'")')
+
+//Try getting redir api response throught CORS
+try{
+    var http2 = new XMLHttpRequest();
+    var url2 = window.corsbypass+"?url=https://publisher.linkvertise.com/api/v1/redirect/link/"+idname+"/target&post="+encodedKey
+    http2.open("GET", url2);
+    http2.send()
+}
+catch(error){
+    console.error('Error at Step 6 | CORS is having a problem, please try again later')
+    return
+}
+console.log('Step 6 | Redirect Link Posted | ("https://publisher.linkvertise.com/api/v1/redirect/link/'+idname+'/target")')
+http2.onload = function(e){
+    //Try getting redir api response content
+    try{
+        var redirData=JSON.parse(http2.responseText)
+    }
+    catch(error){
+        console.error('Error at Step 7 | Error while retriving CORS')
+        return
+    }
+    console.log('Step 7 | Cors was recieved')
+    
+    try{
+        var redirUrl=redirData.data.target
+        window.redirUrl=redirUrl
+    }
+    catch(error){
+        console.error('Error at Step 8 | Linkvertise has blocked our request.')
+        return
+    }
+	
+    console.log('Step 8 | Recieved Link | ("'+redirUrl+'")')
+	if (redirUrl.includes("gamesmodplus")) {
+		document.getElementById("results").href = "Looks like there is a problem with the api, please wait a little bit for the fix";
+		document.getElementById("results").innerHTML = "Looks like there is a problem with the api, please wait a little bit for the fix";
+	}
+	else {
+		document.getElementById("results").href = redirUrl;
+		document.getElementById("results").innerHTML = redirUrl;
+	}
+
+    return
+}
+}
+}
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</body>
+</html>

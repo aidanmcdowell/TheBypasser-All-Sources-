@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style type ="text/css" >
+   .footer{ 
+       position: fixed;     
+       text-align: center;    
+       bottom: 0px; 
+       width: 100%;
+   }  
+</style>
+<meta name="description" content="This bypasser is an easy to use tool for bypassing certain ad-links" />
+<meta name="keywords" content="linkvertise bypasser, linkvertise bypass, linkvertise, bypass, bypasser, bypass linkvertise, how to bypass linkvertise, how to skip linkvertise, linkvertise skipper, skip linkvertise, skip linkvertise ads, linkvertise ads bypass, linkvertise ads bypasser" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Linkvertise Bypasser</title>
+  <link rel="icon" href="https://media.discordapp.net/attachments/649137502489149460/747338762584981524/IMG_4498.PNG">
+<body>
+<h1><center><b>Ad-Link Bypasser V2</b></center></h1>
+<h3><center>Put the ad-link that you want to be bypassed inside the textbox. Then press the Bypass Ad-Link button.</center></h3>
+<h3><center>Ad-Link Bypasser not working? Try <a href="https://thebypasser.com/">TheBypasser Version 1</a> or <a href="https://thebypasser.com/versions/version3.html">TheBypasser Version 3</a></center><br></h3>
+<center><input type="text" placeholder="Paste ad-link link here" id="url"></center><br>
+
+<center><button id="button" onclick="start()">Bypass Ad-Link</button></center><br>
+<center><h3>Output Link:</h3></center>
+<h1 id="h"></h1>
+<center><a href="#" id="output1"></a></center>
+
+<div class="footer"><center><h1><a href=https://discord.gg/PMaj7V5>Join the Discord!</h1></center></div>
+
+<script data-cfasync='false' type='text/javascript' src='//p412311.clksite.com/adServe/banners?tid=OM1BYPASSER_DI'></script>
+
+ <script>
+ try{
+function start() {
+url = document.getElementById("url").value
+
+if (url.includes("95884")) {
+	document.getElementById("output1").href = ""
+    document.getElementById("output1").innerHTML = "You are not allowed to bypass this link"
+	alert("You are not allowed to bypass this link")
+	return;
+}
+if (url.includes("168841")) {
+	document.getElementById("output1").href = ""
+    document.getElementById("output1").innerHTML = "You are not allowed to bypass this link"
+	alert("You are not allowed to bypass this link")
+	return;
+}
+document.getElementById("button").innerHTML = "Bypassing..."
+document.getElementById("output1").innerHTML = ""
+loadXMLDoc()
+}
+
+
+function loadXMLDoc() {
+  xmlhttp = new XMLHttpRequest();
+  xmlhttp.onreadystatechange = function() {
+  if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+      document.getElementById("output1").innerHTML = xmlhttp.responseText.match(/"bypassedlink":"([^)]*)","inputlink"/)[1];
+	  document.getElementById("output1").href = document.getElementById("output1").innerHTML
+	  
+	  if (document.getElementById("output1").innerHTML == "") {
+		return;
+	  }
+	  else { 
+	  document.getElementById("button").innerHTML = 'Bypass Ad-Link'
+	  }
+    }
+	
+  }
+  xmlhttp.open("GET", "https://lvadflys2ugesty.gamesin.repl.co/api?url=" + url, true);
+  xmlhttp.send();
+  }
+} catch {
+    document.getElementById("button").innerHTML = "Ad-Bypass Link"
+    alert("An unexpected error has occured.")
+}
+</script>
+
+<script>
+document.addEventListener("visibilitychange", event => {
+  if (document.visibilityState == "visible") {
+    location.reload()
+  }
+})
+</script>
+
+<script data-cfasync='false' type='text/javascript' src='//p412311.clksite.com/adServe/banners?tid=OM1BYPASSER_DI'></script>
+
+<script>
+  document.getElementById("button").addEventListener("click", start)
+  </script>
+</body>
+
+</html>

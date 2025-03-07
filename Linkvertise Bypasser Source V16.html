@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+    <meta name="description" content="This linkvertise bypasser is an easy to use tool for bypassing linkvertise ad-links" />
+    <title>Linkvertise Bypasser</title>
+    <meta name="google-site-verification" content="Rwcj2iy55rHn9_bXzlhWOrFPuc81-Bi_ztA_gYGjUlE" />
+        <meta HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');</style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/black/pace-theme-flash.min.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+     <meta name="keywords" content="linkvertise bypasser, linkvertise bypass, universal bypass, linkvertise hack, linkvertise, link vertise, bypasser, bypass linkvertise, how to bypass linkvertise, how to skip linkvertise, linkvertise skipper, skip linkvertise, skip linkvertise ads, linkvertise ads bypass, linkvertise ads bypasser" />
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./assets/img/favicon.png">
+</head>
+<body>
+    <div class="container">
+        <div class="jumbotron text-center">
+            <h2 class="display-4">Ad-Link Bypasser</h2>
+			<p class="display-5"><b><code>Works best on Google Chrome</code></b></p><br>
+			<p class="lead">Official Status: <code>Patched</code></p>
+            <h3 id=count></h3>
+            <h3 id=count></h3>
+            <p class="lead">Put the ad-link that you want bypassed inside the textbox. Then press the Bypass Ad-Link button.</p>
+			    <p class="lead">Ad-Link Bypasser not working? <a href="https://discord.gg/9ztVfGPwDb">Join the discord</a></p>
+            <div id="logic">
+                <input type="text" id="input_link" placeholder="Insert Ad-Link Link Here" class="input_box">
+                <br>
+                <div class="buttons">
+                    <button id="submit_btn" class="button" onclick="bypass()">Bypass Ad-Link</button>
+                </div>
+                <br>
+                <center><h3>Output Link:</h3></center>
+                <a href="#" id="results"></a>
+            </div>
+        </div>
+    </div>
+    <script>
+        window.notify=0
+function closenotif(){
+	
+}
+function opennotif(){
+	
+}
+function opennotifforce(){
+		
+}
+function auto(){
+	var queryDict = {}
+	location.search.substr(1).split("&").forEach(function(item) {queryDict[item.split("=")[0]] = item.split("=")[1]})
+	if (typeof(queryDict.link)=="string"){
+		document.getElementById('bypassentry').value=queryDict.link
+	}
+	if (queryDict.start=='true'){
+		bypass()
+	}
+	if (queryDict.redir=='true'){
+		window.autoRedir=true
+	}
+}
+function fill_log(success){
+	
+}
+function make_output(output){
+	document.getElementById("results").href=output
+	document.getElementById("results").innerHTML=output
+}
+function clear_output(){
+	document.getElementById("results").innerHTML="<a id='results' style='color:#2576f7;word-break: break-all;' target='_blank' ></a>"	
+}
+function error_output(){
+	
+}
+//Linkvertise bypasser javascript by GamesModPlus. Bypass method from greasyfork linkvertise bypasser https://greasyfork.org/fr-CA/scripts/409156-linkvertise-bypass/code
+    
+    
+    
+function bypass (){
+	//Create redir url object
+	window.redirUrl=null
+	
+	//Set cors bypass to be able to get link
+	window.corsbypass = 'https://gmpapi.000webhostapp.com/linkvertisecorsbypasser/index.php'
+	
+	//Get link
+	var link = document.getElementById('input_link').value
+	
+	//Clear output
+	clear_output()
+	
+	//Get idname
+	try{
+		var begin = link.match(/\d+/)
+		var end = link.match(/\?/)
+		if (end==null){
+			var idname = link.slice(begin.index, link.length)
+			}
+		else {
+			var idname = link.slice(begin.index, end.index)
+			}
+		}
+	catch(error){
+		console.error('Error at step 1 | Broken link: Make sure the link that you entered is from linkvertise and is not missing parts')
+		fill_log(false)
+		window.bypasserStatus='fail'
+		return
+	}
+	console.log('step 1 | Got id/name link piece | ("'+idname+'")')
+	fill_log(true)
+	
+	//Try getting api response throught CORS
+	try{
+		var http = new XMLHttpRequest();
+		var url = window.corsbypass+"?url=https://publisher.linkvertise.com/api/v1/redirect/link/static/"+idname
+		http.open("GET", url);
+		http.send()
+	}
+	catch(error){
+		console.error('Error at step 2 | Error getting api link with CORS: The CORS bypasser seems to be having problems, please try using the bypasser later')
+		fill_log(false)
+		window.bypasserStatus='fail'
+		return
+	}
+	console.log('step 2 | Got api link | ("https://publisher.linkvertise.com/api/v1/redirect/link/static/'+idname+'")')
+	fill_log(true)
+	http.onload = function(e){
+		//Try getting api response content
+		try{
+			var apiData=JSON.parse(JSON.parse(http.responseText)[1])
+		}
+		catch(error){
+			console.error('Error at step 3 | Error getting api link CORS content: The CORS bypasser gave the wrong output or the linkvertise link is invalid')
+			fill_log(false)
+			window.bypasserStatus='fail'
+			return
+		}
+		console.log('step 3 | Got api link content')
+		fill_log(true)
+		
+		//Create key
+		let key = {
+			timestamp: new Date().getTime(),
+			random: "6548307"
+		}
+		
+		//Try finding key in api content
+		try{
+			key.link_id = apiData.data.link.id
+		}
+		catch(error){
+			console.error('Error at step 4 | Error get failed, make sure the link you entered is correct and if it is try bypassing again')
+			window.bypasserStatus='fail'
+			return
+		}
+		console.log('step 4 | Found key | ("'+apiData.data.link.id+'")')
+		fill_log(true)
+		
+		//Try encoding the key
+		try{
+			encodedKey = JSON.stringify({serial: btoa(JSON.stringify(key))})
+		}
+		catch(error){
+			console.log('Error at step 5 | Error encoding key: The key found could not be encoded sorry')
+			fill_log(false)
+			window.bypasserStatus='fail'
+			return
+		}
+		console.log('step 5 | Encoded key | ("'+encodedKey+'")')
+		fill_log(true)
+		
+		//Try getting redir api response throught CORS
+		try{
+			var http2 = new XMLHttpRequest();
+			var url2 = window.corsbypass+"?url=https://publisher.linkvertise.com/api/v1/redirect/link/"+idname+"/target&post="+encodedKey
+			http2.open("GET", url2);
+			http2.send()
+		}
+		catch(error){
+			console.error('Error at step 6 | Error posting to redir api link with CORS: The CORS bypasser seems to be having problems, please try again later')
+			fill_log(false)
+			window.bypasserStatus='fail'
+			return
+		}
+		console.log('step 6 | Posted to redir api link | ("https://publisher.linkvertise.com/api/v1/redirect/link/'+idname+'/target")')
+		fill_log(true)
+		http2.onload = function(e){
+			//Try getting redir api response content
+			try{
+				var redirData=JSON.parse(JSON.parse(http2.responseText)[1])
+			}
+			catch(error){
+				console.error('Error at step 7 | Error getting redir api link CORS content: The CORS bypasser gave the wrong output or the linkvertise link is invalid')
+				fill_log(false)
+				window.bypasserStatus='fail'
+				return
+			}
+			console.log('step 7 | Got redir api content')
+			fill_log(true)
+			
+			//Try finding redir
+			try{
+				var redirUrl=redirData.data.target
+				window.redirUrl=redirUrl
+			}
+			catch(error){
+				console.error('Error at step 8 | Error post failed try bypassing the link again')
+				fill_log(false)
+				window.bypasserStatus='fail'
+				return
+			}
+			console.log('step 8 | Got redir link | ("'+redirUrl+'")')
+			fill_log(true)
+			window.bypasserStatus='success'
+			make_output(redirUrl)
+			if (window.autoRedir==true){
+				top.window.location.href=redirUrl
+			}
+			return
+		}
+	}
+}
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</body>
+</html>

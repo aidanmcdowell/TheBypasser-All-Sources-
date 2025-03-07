@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style type ="text/css" >
+   .footer{ 
+       position: fixed;     
+       text-align: center;    
+       bottom: 0px; 
+       width: 100%;
+   }  
+</style>
+<meta name="description" content="This bypasser is an easy to use tool for bypassing certain ad-links" />
+<meta name="keywords" content="linkvertise bypasser, linkvertise bypass, linkvertise, bypass, bypasser, bypass linkvertise, how to bypass linkvertise, how to skip linkvertise, linkvertise skipper, skip linkvertise, skip linkvertise ads, linkvertise ads bypass, linkvertise ads bypasser" />
+  <meta charset="utf-8">
+  <title>Ad-Link Bypasser</title>
+  <link rel="icon" href="https://media.discordapp.net/attachments/649137502489149460/747338762584981524/IMG_4498.PNG">
+<script>
+  try{
+function start() {
+url = document.getElementById("url").value
+
+if (url.includes("95884")) {
+	document.getElementById("output1").href = ""
+    document.getElementById("output1").innerHTML = "You are not allowed to bypass this link"
+	alert("You are not allowed to bypass this link")
+	return;
+}
+if (url.includes("168841")) {
+	document.getElementById("output1").href = ""
+    document.getElementById("output1").innerHTML = "You are not allowed to bypass this link"
+	alert("You are not allowed to bypass this link")
+	return;
+}
+document.getElementById("button").innerHTML = "Bypassing..."
+document.getElementById("output1").innerHTML = ""
+bypass(url)
+}
+
+
+function bypass(url) {
+try {
+try {
+urlobj = new URL(url)
+path = urlobj.pathname
+} catch(e) {
+    document.getElementById("button").innerHTML = "Bypass Ad-Link"
+    alert("1An unexpected error has occured.")
+return;
+}
+
+  url1 = "https://ovd-center.eu/API/LinkvertiseBypass.php?url=" + path
+cors = "https://cors-anywhere.herokuapp.com/"
+
+try {
+    var request = new XMLHttpRequest()
+    request.open('GET', cors + url1, true)
+} catch (e) {
+    return;
+}
+request.onload = function() {
+    try {
+        bypassed = this.response
+		if (bypassed.includes("has sent too many requests.")) {
+			document.getElementById("button").innerHTML = "Bypass Ad-Link"
+			document.getElementById("output1").href = "This bypass version is temporarily not working, please use version 2 or 3. Come back in an hour."
+			document.getElementById("output1").innerHTML = "This bypass version is temporarily not working, please use version 2 or 3. Come back in an hour."
+		}
+		else {
+			document.getElementById("button").innerHTML = "Bypass Ad-Link"
+			document.getElementById("output1").href = bypassed
+			document.getElementById("output1").innerHTML = bypassed
+		}
+    } catch (e) {
+        document.getElementById("button").innerHTML = "Bypass Ad-Link"
+        alert("2An unexpected error has occured.")
+        return;
+    }
+}
+request.send()
+
+} catch (e) {
+    document.getElementById("button").innerHTML = "Bypass Ad-Link"
+    alert("3An unexpected error has occured.")
+    return;
+}
+
+}
+
+} catch {
+    document.getElementById("button").innerHTML = "Ad-Bypass Link"
+    alert("4An unexpected error has occured.")
+}
+
+</script>
+</head>
+<body>
+<h1><center><b>Ad-Link Bypasser</b></center></h1>
+<h3><center>Put the ad-link that you want to be bypassed inside the textbox. Then press the Bypass Ad-Link button.</center></h3>
+<h3><center>Ad-Link Bypasser not working? Try <a href="https://thebypasser.com/versions/version2.html">TheBypasser Version 2</a> or <a href="https://thebypasser.com/versions/version3.html">TheBypasser Version 3</a></center><br></h3>
+<center><input type="text" placeholder="Paste ad-link link here" id="url"></center><br>
+
+<center><button id="button" onclick="start()">Bypass Ad-Link</button></center><br>
+<center><h3>Output Link:</h3></center>
+
+<center><a href="#" id="output1"></a></center><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+<div class="footer"><center><h1><a href=https://discord.gg/PMaj7V5>Join the Discord!</h1></center></div>
+
+<script data-cfasync='false' type='text/javascript' src='//p412311.clksite.com/adServe/banners?tid=OM1BYPASSER_DI'></script>
+
+</body>
+</html>

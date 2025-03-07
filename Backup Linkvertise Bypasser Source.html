@@ -1,0 +1,113 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+
+  <meta charset="utf-8">
+  <meta name="generator"/>
+  <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+<META HTTP-EQUIV="EXPIRES" CONTENT="Mon, 22 Jul 2002 11:12:01 GMT">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <style>
+  input,button { font-size: 30px; } 
+.container {
+    left: 0;
+    margin-top: -100px;
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    width: 100%;
+}
+ 
+  </style>
+  <title>Linkvertise Bypasser</title>
+
+</head>
+<body>
+<center>
+      <div class="container">
+<h1>Linkvertise Bypasser<br>
+<input type="text" placeholder="Enter Linkvertise URL" id="url">
+<button id="button">Bypass</button>
+<h1 id="h"></h1>
+<a href="#" id="ad"></a>
+</div>
+</center>
+ <script>
+ //Bypass.js Not obfuscated....
+
+function start() {
+document.getElementById("h").innerHTML = "please wait"
+document.getElementById("ad").href = "#"
+document.getElementById("ad").innerHTML = ""
+url = document.getElementById("url").value
+bypass(url)
+}
+
+
+function bypass(url) {
+try {
+console.log("starting bypass")
+try {
+urlobj = new URL(url)
+} catch(e) {
+changeText("URL Is not valid")
+console.warn(e)
+return;
+}
+
+
+
+path = urlobj.pathname
+console.log(1)
+
+    let o={timestamp:new Date().getTime(),random:"6548307"},
+    url1="https://publisher.linkvertise.com/api/v1/redirect/link/static"+path
+    console.log(2)
+    fetch(url1).then(r=>r.json()).then(json=>{
+    console.log(3)
+        if(json&&json.data.link.id)
+        {
+         console.log(7)
+  
+            o.link_id=json.data.link.id
+            url1="https://publisher.linkvertise.com/api/v1/redirect/link"+path+"/target?serial=" + encodeURIComponent(btoa(JSON.stringify(o)));
+            console.log(5)
+        }
+    }).then(()=>fetch(url1)).then(r=>r.json()).then(json=>{
+    console.log(6)
+        if(json&&json.data.target)
+        {
+                document.getElementById("h").innerHTML = "<b>Bypassed:</b> <br>"
+
+document.getElementById("ad").href = json.data.target
+
+document.getElementById("ad").innerHTML = json.data.target
+        }
+    })
+
+
+
+} catch(e) {
+
+}
+}
+
+function setProgress(amount) {
+console.log(amount)
+}
+
+function changeText(text) {
+document.getElementById("h").innerHTML = "<b>"+text+"</b> <br>"
+}
+
+
+</script>
+<script>
+  document.getElementById("button").addEventListener("click", start)
+  </script>
+
+</body>
+</html>
